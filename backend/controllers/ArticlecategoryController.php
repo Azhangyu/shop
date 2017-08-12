@@ -22,7 +22,7 @@ class ArticlecategoryController extends \yii\web\Controller
             //保存数据
             $model->save();
            //提示信息
-            \Yii::$app->session->setFlash('success','文章添加成功');
+            \Yii::$app->session->setFlash('success','成功添加新的分类');
             //数据添加完成跳转到首页
             return $this->redirect(['articlecategory/index']);
         }
@@ -43,7 +43,7 @@ class ArticlecategoryController extends \yii\web\Controller
             //保存数据
             $model->save();
             //提示信息
-            \Yii::$app->session->setFlash('success','文章添加成功');
+            \Yii::$app->session->setFlash('success','修改了分类');
             //数据添加完成跳转到首页
             return $this->redirect(['articlecategory/index']);
         }
@@ -55,6 +55,8 @@ class ArticlecategoryController extends \yii\web\Controller
         $model = articlecategory::findOne(['id'=>$id]);
         $model->status = -1;
         $model->save();
+        //提示信息
+        \Yii::$app->session->setFlash('danger','删除成功');
         return $this->redirect(['articlecategory/index']);
     }
 

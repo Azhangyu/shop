@@ -42,11 +42,11 @@ class Articlecategory extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => '文章名称',
-            'intro' => '文章简介',
+            'id' => '编号',
+            'name' => '分类名称',
+            'intro' => '分类简介',
             'sort' => '排序',
-            'status' => '状态',
+            'status' => '当前状态',
         ];
     }
 }

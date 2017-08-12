@@ -8,12 +8,12 @@
 ?>
     <table class="table">
         <tr>
-            <td>编号</td>
-            <td>姓名</td>
-            <td>简介</td>
-            <td>头像</td>
+            <td>品牌编号</td>
+            <td>品牌名称</td>
+            <td>品牌简介</td>
+            <td>品牌logo</td>
             <td>排序</td>
-            <td>状态</td>
+            <td>当前状态</td>
             <td>操作</td>
 
             <!--        <td>操作</td>-->
@@ -32,7 +32,7 @@
                 </td>
             </tr>
         <?php endforeach;?>
-        <a class="btn btn-link" href="<?=\yii\helpers\Url::to(['brand/add'])?>">添加用户</a>
+        <a class="btn btn-link" href="<?=\yii\helpers\Url::to(['brand/add'])?>">添加品牌</a>
 
     </table>
     <!--视图中要显示分页，要使用到LinkPager::widget 小部件-->

@@ -35,13 +35,13 @@ class Brand extends \yii\db\ActiveRecord
     {
         return [
             //自动验证不为空
-            [['name', 'intro', 'sort'], 'required'],
+            [['name', 'intro', 'logo','sort'], 'required'],
             [['intro'], 'string'],
             [['sort', 'status'], 'integer'],
             [['name'], 'string', 'max' => 50],
 //            [['logo'], 'string', 'max' => 255],
         //  file 文件上传验证规则 extensions设置哪些 后缀名通过 skipOnEmpty 字段为空跳过当前验证
-        ['imgFile','file','extensions'=>['jpg','png','gif'],'skipOnEmpty'=>true],
+//        ['imgFile','file','extensions'=>['jpg','png','gif'],'skipOnEmpty'=>true],
 ];
 }
 
@@ -51,12 +51,12 @@ class Brand extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => '名称',
-            'intro' => '简介',
-            'logo' => 'LOGO',
+            'id' => '品牌ID',
+            'name' => '品牌名称',
+            'intro' => '品牌简介',
+            'logo' => '品牌LOGO',
             'sort' => '排序',
-            'status' => '状态',
+            'status' => '当前状态',
         ];
     }
 }
