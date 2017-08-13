@@ -6,7 +6,7 @@
  * Time: 11:41
  */
 ?>
-    <a class="btn btn-link" href="<?=\yii\helpers\Url::to(['articlecategory/add'])?>">添加新的分类</a>
+    <a class="btn btn-link glyphicon glyphicon-pencil" href="<?=\yii\helpers\Url::to(['articlecategory/add'])?>">添加新的分类</a>
      <?php echo "<br>"?>
     文章分类
     <table class="table">
@@ -33,8 +33,8 @@
                 <td><?php echo $v->intro; ?></td>
                 <td><?php echo $v->sort; ?></td>
                 <td><?php echo $v->status; ?></td>
-                <td><?= \yii\helpers\Html::a('修改', ['articlecategory/edit','id'=>$v->id],['class'=>'btn btn-primary'])?>
-                    <?= \yii\helpers\Html::a('删除', ['articlecategory/del','id'=>$v->id],['class'=>'btn btn-danger'])?>
+                <td><?= \yii\helpers\Html::a('修改', ['articlecategory/edit','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-edit'])?>
+                    <?= \yii\helpers\Html::a('删除', ['articlecategory/del','id'=>$v->id],['class'=>'btn btn-danger glyphicon glyphicon-trash'])?>
                 </td>
             </tr>
         <?php endforeach;?>

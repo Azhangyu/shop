@@ -25,19 +25,21 @@
     <!-- 循环读取数据库中的数据  键名 键值都是对象 -->
     <?php foreach($rows as $v): ?>
         <tr>
-            <td><?php echo $v['id']; ?></td>
-            <td><?php echo $v['name']; ?></td>
-            <td><?php echo $v['intro']; ?></td>
-            <td><?php echo $v['index']['name'];?></td>
-            <td><?php echo $v['sort']; ?></td>
-            <td><?php echo $v['status']; ?></td>
-            <td><?php echo $v['create_time']; ?></td>
-            <td><?= \yii\helpers\Html::a('修改', ['article/edit','id'=>$v['id']],['class'=>'btn btn-primary'])?>
-                <?= \yii\helpers\Html::a('删除', ['article/del','id'=>$v['id']],['class'=>'btn btn-danger'])?>
+            <td><?php echo $v->id; ?></td>
+            <td><?php echo $v->name; ?></td>
+            <td><?php echo $v->intro; ?></td>
+            <td><?php echo $v->article->name;?></td>
+            <td><?php echo $v->sort; ?></td>
+            <td><?php echo $v->status ?></td>
+            <td><?php echo $v->create_time; ?></td>
+            <td>
+                <?= \yii\helpers\Html::a('查看内容', ['article/more','id'=>$v->id],['class'=>'btn btn-info glyphicon glyphicon-eye-open'])?>
+                <?= \yii\helpers\Html::a('修改', ['article/edit','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-edit'])?>
+                <?= \yii\helpers\Html::a('删除', ['article/del','id'=>$v->id],['class'=>'btn btn-danger glyphicon glyphicon-trash'])?>
             </td>
         </tr>
     <?php endforeach;?>
-    <a class="btn btn-link" href="<?=\yii\helpers\Url::to(['article/add'])?>">添加文章</a>
+    <a class="btn btn-link glyphicon glyphicon-pencil" href="<?=\yii\helpers\Url::to(['article/add'])?>">添加文章</a>
 
 </table>
 <?= \yii\widgets\LinkPager::widget([

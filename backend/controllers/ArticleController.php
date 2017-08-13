@@ -6,7 +6,6 @@ use backend\models\Article;
 use backend\models\Articlecategory;
 use backend\models\Articledetail;
 use yii\data\Pagination;
-
 class ArticleController extends \yii\web\Controller
 {
 
@@ -22,6 +21,7 @@ class ArticleController extends \yii\web\Controller
             {
                 if ($modelB->save(false))//前面已经验证通过了,这里加个false,表示保存之前不需要再验证了！
                 {
+                    //Article id = Articledetail  article_id
                     $modelA->id = $modelB->article_id;
                     if ($modelA->save(false)) {
                         $this->redirect(['article/index']);
@@ -42,6 +42,7 @@ class ArticleController extends \yii\web\Controller
         $modelB =Articledetail::findOne(['article_id' => $id]);//实例化模型Articledetail
         if (isset($_POST['Article']) && isset($_POST['Articledetail']))//判断用户数据与身份信息
         {
+            //attributes 赋值 并不是覆盖值 只是修改 覆盖 将右边的值完全赋值给左边，之后两个的值一样，修改将左边的数值改为右边 之后互不影响
             $modelA->attributes = $_POST['Article'];
             $modelB->attributes = $_POST['Articledetail'];
             if ($modelA->validate() && $modelB->validate())//验证数据，如果通过再save()。
@@ -72,21 +73,26 @@ class ArticleController extends \yii\web\Controller
     //文章显示主页
     public function actionIndex()
     {
-        //读取数据 链表查询
-        $rows =Article::find()->joinWith('index')->asArray()->where('Article.status>=0');
+        //读取数据 对象
+        $articles =Article::find()->where('Article.status>=0');
 
         //分页操作
         $page= new Pagination([
             //总数据条数
-            'totalCount'=>$rows->count(),
+            'totalCount'=>$articles->count(),
             //每页显示条数
             'defaultPageSize' =>5,
 //            'pageSizeLimit' => [1,20]
         ]);
-        $row=$rows->offset($page->offset)
+        $row=$articles->offset($page->offset)
             ->limit($page->pageSize)
             ->all();
         return $this->render('index',['rows'=>$row,'page'=>$page]);
     }
-
+    //文章详细内容显示页面
+     public function actionMore($id){
+        $rows = articledetail::findOne(['article_id'=>$id]);
+//        var_dump($rows);exit;
+        return $this->render('more',['rows'=>$rows]);
+   }
 }

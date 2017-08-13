@@ -55,7 +55,7 @@ class Article extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getIndex()
+    public function getArticle()
     {
         //对应关系                  被关联的表对应的模型路径↓   被关联表的字段↓  本模型中的字段↓
         return $this->hasOne('backend\models\Articlecategory', ['id' => 'article_category_id']);

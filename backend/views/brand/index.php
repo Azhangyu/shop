@@ -27,12 +27,12 @@
                 <td><img src="<?= $v->logo?>" width="50px"></td>
                 <td><?php echo $v->sort; ?></td>
                 <td><?php echo $v->status; ?></td>
-                <td><?= \yii\helpers\Html::a('修改', ['brand/edit','id'=>$v->id],['class'=>'btn btn-primary'])?>
-                    <?= \yii\helpers\Html::a('删除', ['brand/del','id'=>$v->id],['class'=>'btn btn-danger'])?>
+                <td><?= \yii\helpers\Html::a('修改', ['brand/edit','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-edit'])?>
+                    <?= \yii\helpers\Html::a('删除', ['brand/del','id'=>$v->id],['class'=>'btn btn-danger glyphicon glyphicon-trash'])?>
                 </td>
             </tr>
         <?php endforeach;?>
-        <a class="btn btn-link" href="<?=\yii\helpers\Url::to(['brand/add'])?>">添加品牌</a>
+        <a class="btn btn-link glyphicon glyphicon-pencil" href="<?=\yii\helpers\Url::to(['brand/add'])?>">添加品牌</a>
 
     </table>
     <!--视图中要显示分页，要使用到LinkPager::widget 小部件-->
