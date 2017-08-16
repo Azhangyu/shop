@@ -2,9 +2,11 @@
 ?>
 
 
-<h3>文章内容</h3>
+<h3><?php echo $articles->name;?></h3>
 
-<div>
+<p>创建时间:<?php echo $articles->create_time;?></p>
+
+<p class="text-left">
     <?php echo $rows->content;?>
-</div>
+</p>
 

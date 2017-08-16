@@ -73,16 +73,16 @@ class ArticleController extends \yii\web\Controller
     //文章显示主页
     public function actionIndex()
     {
+        //根据get方式 数据 like模糊查询  三元表达式 若没有值  赋值默认为空
+        $name=\Yii::$app->request->get('name')?\Yii::$app->request->get('name'):"";
+        $articles=Article::find()->where("article.status>=0 and article.name like '%$name%'");
         //读取数据 对象
-        $articles =Article::find()->where('Article.status>=0');
-
         //分页操作
         $page= new Pagination([
             //总数据条数
             'totalCount'=>$articles->count(),
             //每页显示条数
             'defaultPageSize' =>5,
-//            'pageSizeLimit' => [1,20]
         ]);
         $row=$articles->offset($page->offset)
             ->limit($page->pageSize)
@@ -92,7 +92,8 @@ class ArticleController extends \yii\web\Controller
     //文章详细内容显示页面
      public function actionMore($id){
         $rows = articledetail::findOne(['article_id'=>$id]);
+         $articles =Article::findOne(['id'=>$id]);
 //        var_dump($rows);exit;
-        return $this->render('more',['rows'=>$rows]);
+        return $this->render('more',['rows'=>$rows,'articles'=>$articles]);
    }
 }

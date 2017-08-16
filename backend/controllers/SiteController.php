@@ -50,6 +50,11 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'cap' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'minLength' => 4,
+                'maxLength' => 6
+            ]
         ];
     }
 

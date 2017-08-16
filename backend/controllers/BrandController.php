@@ -95,7 +95,7 @@ class BrandController extends \yii\web\Controller
 
                 //保存到数据库
                 $model->save();
-                \Yii::$app->session->setFlash('danger','删除成功');//success警告框样式，第二个参数 提示信息
+                \Yii::$app->session->setFlash('danger','修改成功');//success警告框样式，第二个参数 提示信息
                 //跳转到品牌首页
                 return $this->redirect(['brand/index']);
             }else{

@@ -12,12 +12,16 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    //默认显示首页  路径
+    'defaultRoute' => 'admin/login',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            //配置user路径
+            'identityClass' => 'backend\models\admin',
+            //是否开启自动验证  true开启 flase关闭
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],

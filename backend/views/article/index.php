@@ -1,6 +1,16 @@
 <?php
 /* @var $this yii\web\View */
 ?>
+    <a class="btn btn-link glyphicon glyphicon-pencil" href="<?=\yii\helpers\Url::to(['article/add'])?>">添加文章     </a>
+
+    <form class="form-inline" action="/article/index" method="get" role="form">
+        <div class="form-group field-articlesearchform-name">
+           <input type="text" id="articlesearchform-name" class="form-control" name="name" placeholder="标题">
+        </div>
+
+        <button type="submit" class="btn btn-default glyphicon glyphicon-zoom-in">搜索</button>
+        <button type="submit" class="btn btn-default glyphicon glyphicon-repeat" href="<?=\yii\helpers\Url::to(['article/index'])?>">返回</button>
+    </form>
 <table class="table">
     <tr>
 <!--        字段名	类型	注释-->
@@ -39,8 +49,6 @@
             </td>
         </tr>
     <?php endforeach;?>
-    <a class="btn btn-link glyphicon glyphicon-pencil" href="<?=\yii\helpers\Url::to(['article/add'])?>">添加文章</a>
-
 </table>
 <?= \yii\widgets\LinkPager::widget([
     'pagination' => $page,
