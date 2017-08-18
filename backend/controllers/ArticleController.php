@@ -73,18 +73,28 @@ class ArticleController extends \yii\web\Controller
     //文章显示主页
     public function actionIndex()
     {
-        //根据get方式 数据 like模糊查询  三元表达式 若没有值  赋值默认为空
-        $name=\Yii::$app->request->get('name')?\Yii::$app->request->get('name'):"";
-        $articles=Article::find()->where("article.status>=0 and article.name like '%$name%'");
+      //搜索功能 get获取传递的属性字段
+        $name=\Yii::$app->request->get('name');
+//        $articles=Article::find()->where("article.status>=0 and article.name like '%$name%'");
+        if($name){
+            //where  andwhere追加条件
+            $query=Article::find()
+                ->where("article.status>=0")
+                //andwhere 条件需要中括号
+                ->andWhere(['like','name',$name]);
+        }else{
+            $query=Article::find()
+                ->where("article.status>=0");
+        }
         //读取数据 对象
         //分页操作
         $page= new Pagination([
             //总数据条数
-            'totalCount'=>$articles->count(),
+            'totalCount'=>$query->count(),
             //每页显示条数
             'defaultPageSize' =>5,
         ]);
-        $row=$articles->offset($page->offset)
+        $row=$query->offset($page->offset)
             ->limit($page->pageSize)
             ->all();
         return $this->render('index',['rows'=>$row,'page'=>$page]);

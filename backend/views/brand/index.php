@@ -26,7 +26,7 @@
                 <td><?php echo $v->intro; ?></td>
                 <td><img src="<?= $v->logo?>" width="50px"></td>
                 <td><?php echo $v->sort; ?></td>
-                <td><?php echo $v->status; ?></td>
+                <td><?php echo $v->status==1?"上线":"下架"; ?></td>
                 <td><?= \yii\helpers\Html::a('修改', ['brand/edit','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-edit'])?>
                     <?= \yii\helpers\Html::a('删除', ['brand/del','id'=>$v->id],['class'=>'btn btn-danger glyphicon glyphicon-trash'])?>
                 </td>

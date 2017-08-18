@@ -8,6 +8,7 @@
            <input type="text" id="articlesearchform-name" class="form-control" name="name" placeholder="标题">
         </div>
 
+
         <button type="submit" class="btn btn-default glyphicon glyphicon-zoom-in">搜索</button>
         <button type="submit" class="btn btn-default glyphicon glyphicon-repeat" href="<?=\yii\helpers\Url::to(['article/index'])?>">返回</button>
     </form>
