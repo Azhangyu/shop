@@ -36,26 +36,30 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => '商品管理', 'url' => ['/goods/index']],
-        ['label' => '用户管理', 'url' => ['/admin/index']],
-        ['label' => '商品分类', 'url' => ['/goodscategory/index']],
-        ['label' => '品牌管理', 'url' => ['/brand/index']],
-        ['label' => '文章管理', 'url' => ['/article/index']],
-        ['label' => '文章分类', 'url' => ['/articlecategory/index']],
-        ['label' => 'Home', 'url' => ['/site/index']],
+//        ['label' => 'RBAC角色', 'url' => ['/rbac/roleindex']],
+//        ['label' => 'RBAC权限', 'url' => ['/rbac/parmissionindex']],
+//        ['label' => '商品管理', 'url' => ['/goods/index']],
+//        ['label' => '用户管理', 'url' => ['/admin/index']],
+//        ['label' => '商品分类', 'url' => ['/goodscategory/index']],
+//        ['label' => '品牌管理', 'url' => ['/brand/index']],
+//        ['label' => '文章管理', 'url' => ['/article/index']],
+//        ['label' => '文章分类', 'url' => ['/articlecategory/index']],
+//        ['label' => 'Home', 'url' => ['/site/index']],
 
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/admin/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+//        $menuItems[] = '<li>'
+//            . Html::beginForm(['/site/logout'], 'post')
+//            . Html::submitButton(
+//                'Logout (' . Yii::$app->user->identity->username . ')',
+//                ['class' => 'btn btn-link logout']
+//            )
+//            . Html::endForm()
+//            . '</li>';
+        $menuItems[] = ['label' => '注销', 'url' => ['admin/logout']];
+        $menuItems = array_merge($menuItems,Yii::$app->user->identity->getMenus());
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

@@ -24,6 +24,8 @@ return [
             //是否开启自动验证  true开启 flase关闭
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            //默认跳转登陆地址
+            'loginUrl'=>'admin/login'
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend

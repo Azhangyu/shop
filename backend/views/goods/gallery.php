@@ -79,4 +79,3 @@ $url = \yii\helpers\Url::to(['ajax-del']);
     });
 JS
     ));
-    //$this->registerJs('');
