@@ -2,11 +2,22 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\PermissionForm;
 use backend\models\RoleForm;
 
 class RbacController extends \yii\web\Controller
 {
+    //配置过滤器
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'except'=>['login','logout','cap','upload','s-upload','gallery','gii']
+            ]
+        ];
+    }
     public function actionIndex(){
         return $this->render('index');
     }

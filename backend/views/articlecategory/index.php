@@ -34,7 +34,7 @@
                 <td><?php echo $v->sort; ?></td>
                 <td><?php echo $v->status; ?></td>
                 <td><?= \yii\helpers\Html::a('修改', ['articlecategory/edit','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-edit'])?>
-                    <?= \yii\helpers\Html::a('删除', ['articlecategory/del','id'=>$v->id],['class'=>'btn btn-danger glyphicon glyphicon-trash'])?>
+                    <button id="<?=$v->id?>" onclick="delarticlecategory(<?=$v->id?>)" class=" btn btn-danger glyphicon glyphicon-trash">删除</button>
                 </td>
             </tr>
         <?php endforeach;?>
@@ -47,3 +47,20 @@
     'maxButtonCount' => 5,
     'hideOnSinglePage' => false
 ])?>
+
+
+<script>
+    function delarticlecategory(id) {
+        if (confirm("确定删除吗?")){
+            $.getJSON("http://admin.shop.com/articlecategory/del","id="+id+"",function (data) {
+//
+                if (data ===1){
+                    //删除当前节点的父节点
+                    $("#"+id+"").closest('tr').remove();
+                }else {
+                    console.log(data);
+                }
+            })
+        }
+    }
+</script>

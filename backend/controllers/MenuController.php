@@ -2,11 +2,22 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\Menu;
 use backend\models\PermissionForm;
 
 class MenuController extends \yii\web\Controller
 {
+    //配置过滤器
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'except'=>['login','logout','cap','upload','s-upload','gallery','gii']
+            ]
+        ];
+    }
     //添加菜单
     public function actionAdd(){
         $model = new Menu();

@@ -10,7 +10,16 @@ use yii\data\Pagination;
 
 class AdminController extends \yii\web\Controller
 {
-
+    //配置过滤器
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'except'=>['login','logout','cap','upload','s-upload','gallery','xiu']
+            ]
+        ];
+    }
     public function actions()
     {
         return [

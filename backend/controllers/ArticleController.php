@@ -2,12 +2,23 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\Article;
 use backend\models\Articlecategory;
 use backend\models\Articledetail;
 use yii\data\Pagination;
 class ArticleController extends \yii\web\Controller
 {
+    //配置过滤器
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'except'=>['login','logout','cap','upload','s-upload','gallery']
+            ]
+        ];
+    }
 
     public function actionAdd()
     {

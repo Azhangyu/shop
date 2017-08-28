@@ -25,6 +25,7 @@
 $this->registerCssFile('@web/tables/media/css/jquery.dataTables.css');
 $this->registerJsFile('@web/tables/media/js/jquery.dataTables.js',
     ['depends'=>\yii\web\JqueryAsset::className()]);
+
 $this->registerJs(<<<JS
 
    $(document).ready( function () {
@@ -57,3 +58,4 @@ $this->registerJs(<<<JS
     } );
 JS
 );
+

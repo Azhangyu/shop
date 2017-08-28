@@ -16,7 +16,7 @@
 
         <td>
             <?= \yii\helpers\Html::a('修改', ['goodscategory/edit','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-edit'])?>
-            <?= \yii\helpers\Html::a('删除', ['goodscategory/del','id'=>$v->id],['class'=>'btn btn-danger glyphicon glyphicon-trash'])?>
+            <button id="<?=$v->id?>" onclick="delgoodscategory(<?=$v->id?>)" class=" btn btn-danger glyphicon glyphicon-trash">删除</button>
         </td>
     </tr>
   <?php endforeach;?>
@@ -27,3 +27,19 @@
     'maxButtonCount' => 5,
     'hideOnSinglePage' => false
 ])?>
+
+<script>
+    function delgoodscategory(id) {
+        if (confirm("确定删除吗?")){
+            $.getJSON("http://admin.shop.com/goodscategory/del","id="+id+"",function (data) {
+//
+                if (data ===1){
+                    //删除当前节点的父节点
+                    $("#"+id+"").closest('tr').remove();
+                }else {
+                    console.log(data);
+                }
+            })
+        }
+    }
+</script>

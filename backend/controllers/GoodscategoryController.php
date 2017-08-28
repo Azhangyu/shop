@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\Goodscategory;
 use yii\data\Pagination;
 use yii\db\Exception;
@@ -10,6 +11,16 @@ use yii\web\HttpException;
 
 class GoodscategoryController extends Controller
 {
+    //配置过滤器
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'except'=>['login','logout','cap','upload','s-upload','gallery','gii']
+            ]
+        ];
+    }
 //    商品分类添加
     public function actionAdd(){
          //实例化模型
@@ -53,7 +64,7 @@ class GoodscategoryController extends Controller
             //总数据条数
             'totalCount'=>$rows->count(),
             //每页显示条数
-            'defaultPageSize' =>5,
+            'defaultPageSize' =>10,
             'pageSizeLimit' => [1,20]
         ]);
         $Goodscategorys=$rows->offset($page->offset)
@@ -79,7 +90,7 @@ class GoodscategoryController extends Controller
                    //判断  深度最多大于等于2  最多添加3级节点
                    if ($parent->depth >=2) {
                        //提示信息并跳转
-                       \Yii::$app->session->setFlash('danger','最多只能添加到3级节点');
+                       \Yii::$app->session->setFlash('danger','最多只能修改到3级节点');
                        return $this->redirect(['goodscategory/add']);
                    }
                    //创建子分类

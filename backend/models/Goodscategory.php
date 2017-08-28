@@ -103,4 +103,8 @@ public function varparent(){
             )
         );
     }
+    //建立父分类与子分类一对多的关系  自身模型建立的关系  parent_id 被关联的id   id 关联的id
+    public function getChilen(){
+        return $this->hasMany(Goodscategory::className(),['parent_id'=>'id']);
+    }
 }

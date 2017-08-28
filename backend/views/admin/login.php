@@ -18,7 +18,7 @@ echo $form->field($model, 'cap')->widget(yii\captcha\Captcha::className(),[
     'captchaAction' => 'admin/cap',
     //img效果
     'imageOptions'=>['alt'=>'点击换图','title'=>'点击换图', 'style'=>'cursor:pointer'],
-    'template'=>'<div class="row"><div class="col-lg-2">{input}</div><div class="col-lg-2">{image}</div></div>'
+  'template'=>'<div class="row"><div class="col-lg-2">{input}</div><div class="col-lg-2">{image}</div></div>'
 ]);
 
 echo $form->field($model,'rememberMe')->checkbox([0]);

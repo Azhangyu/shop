@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\Brand;
 use yii\data\Pagination;
 use yii\web\UploadedFile;
@@ -10,7 +11,16 @@ use flyok666\uploadifive\UploadAction;
 use flyok666\qiniu\Qiniu;
 class BrandController extends \yii\web\Controller
 {
-
+    //配置过滤器
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'except'=>['login','logout','cap','upload','s-upload','gallery','gii']
+            ]
+        ];
+    }
     //品牌添加
     public function actionAdd(){
         //实例化request组件

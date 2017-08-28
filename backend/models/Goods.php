@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use frontend\models\Cart;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -79,4 +80,11 @@ class Goods extends \yii\db\ActiveRecord
                             //被关联的模型              关联的模型id      本表id
         return $this->hasMany(GoodsGallery::className(),['goods_id'=>'id']);
     }
+    //商品与购物车关联
+    public function getCarts(){
+        return $this->hasOne(Cart::className(),['goods_id'=>'id']);
+    }
+
+
+
 }

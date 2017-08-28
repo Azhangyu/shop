@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\Brand;
 use backend\models\Goods;
 use backend\models\Goodscategory;
@@ -16,15 +17,35 @@ use yii\web\NotFoundHttpException;
 
 class GoodsController extends \yii\web\Controller
 {
+    //配置过滤器
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'except'=>['login','logout','cap','upload','s-upload','gallery','gii']
+            ]
+        ];
+    }
     //商品添加
     public function actionAdd()
     {
+
         $model = new  Goods();
         $goodsIntro =new GoodsIntro();
         //goods_day_count 商品每日添加数
         $goodsCount = new GoodsDayCount();
         //判定和验证是否成功  goods；GoodsIntro  首先验证
         if ($model->load(\Yii::$app->request->post())&& $model->validate()&&$goodsIntro->load(\Yii::$app->request->post()) && $goodsIntro->validate()){
+            $goodsca = Goodscategory::findOne(['id'=>$model->goods_category_id]);
+//            var_dump($goodsca->depth);exit;
+            if($goodsca->depth <=1){
+                \Yii::$app->session->setFlash('danger', '只能选择3级分类');
+                //页面刷新
+                return $this->refresh();
+            }
+//            var_dump($goodsca->depth);exit;
+//            var_dump($goodscategory->intro);exit;
             //获取GoodsDayCount单独一个对象
             $GoodsCountOne = GoodsDayCount::find()->where(['day'=>date('Ymd')])->one();
             //判定该对象是否存在
@@ -50,6 +71,7 @@ class GoodsController extends \yii\web\Controller
                 $goodsCount->count =1;
             }
                 $model->create_time = time();
+//            var_dump($model->create_time);exit;
                 $model->save();
                 //保存商品详情内容 将id赋值给商品详情内容的goods_id
                 $goodsIntro->goods_id = $model->id;

@@ -61,7 +61,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
             //邮箱验证规则
             [['email'], 'email'],
             //验证码验证规则 captcha   验证的路径captchaAction   提示信息message
-//            [['cap'],'captcha','captchaAction'=>'admin/cap','message'  =>'验证码错误'],
+            [['cap'],'captcha','captchaAction'=>'admin/cap','message'  =>'验证码错误'],
             //自定义验证规则
 //            [['password_reset'],'compare','compareAttribute'=>'password','operator'=>'===','message'=>'两次密码必须一致']
         ];

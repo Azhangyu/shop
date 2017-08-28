@@ -30,7 +30,7 @@
     <td>
         <?= \yii\helpers\Html::a('相册', ['goods/gallery','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-picture'])?>
         <?= \yii\helpers\Html::a('修改', ['goods/edit','id'=>$v->id],['class'=>'btn btn-primary glyphicon glyphicon-edit'])?>
-        <?= \yii\helpers\Html::a('删除', ['goods/del','id'=>$v->id],['class'=>'btn btn-danger glyphicon glyphicon-trash'])?>
+        <button id="<?=$v->id?>" onclick="delgoods(<?=$v->id?>)" class=" btn btn-danger glyphicon glyphicon-trash">删除</button>
     </td>
     </tr>
 <?php endforeach;?>
@@ -40,3 +40,18 @@
     //'maxButtonCount' => 5,
     'hideOnSinglePage' => true
 ])?>
+<script>
+    function delgoods(id) {
+        if (confirm("确定删除吗?")){
+            $.getJSON("http://admin.shop.com/goods/del","id="+id+"",function (data) {
+//
+                if (data ===1){
+                    //删除当前节点的父节点
+                    $("#"+id+"").closest('tr').remove();
+                }else {
+                    console.log(data);
+                }
+            })
+        }
+    }
+</script>
